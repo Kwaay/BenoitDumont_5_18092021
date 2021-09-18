@@ -1,0 +1,10 @@
+{
+  "name": "p5-orinoco",
+  "version": "1.0.0",
+  "description": "Projet 5 d'OC",
+  "scripts": {
+    "sass" : "sass  --no-source-map --watch ./src/sass/main.scss:./public/css/style.css"   
+  },
+  "author": "KWAAY",
+  "license": "ISC"
+}
