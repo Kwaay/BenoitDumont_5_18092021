@@ -95,20 +95,23 @@ header img {
   position: relative;
   background: linear-gradient(318deg, #9860e0, #c7795e);
   padding: 3px;
-  margin: 0.5vh;
+  margin: 1vh;
   border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
 }
-.module {
+  .module {
   background: white;
   color: white;
   padding: 0.5vh;
   cursor: pointer;
-  border-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .specs {
   padding: 1vh 0.5vh ;
-  color: black;
+  color: whitesmoke;
   text-align: center;
+  text-shadow: 1px 1px 2px black, 0 0 1em #A8A8A8, 0 0 0.2em #A8A8A8;
 }
 
 /*--------------------- Shooping Cart ----------------------*/
