@@ -73,7 +73,7 @@ header img {
 
 /*--------------------- Index ----------------------*/
 #presentation {
-  padding: 1vh;
+  padding: 1.5vh;
   text-align: center;
 }
 
@@ -88,23 +88,27 @@ header img {
   width: 128px;
   height: auto;
   border: 1.5px solid;
-  border-radius: 50%;
+  border-radius: 30px;
 }
 
 .border-gradient {
   position: relative;
   background: linear-gradient(318deg, #9860e0, #c7795e);
   padding: 3px;
-  border-radius: 50%;
   margin: 0.5vh;
+  border-radius: 20px;
 }
-
 .module {
   background: white;
   color: white;
-  border-radius: 50%;
   padding: 0.5vh;
   cursor: pointer;
+  border-radius: 20px;
+}
+.specs {
+  padding: 1vh 0.5vh ;
+  color: black;
+  text-align: center;
 }
 
 /*--------------------- Shooping Cart ----------------------*/
@@ -117,6 +121,7 @@ header img {
 }
 
 .total {
+  padding-top: 1vh;
   font-size: 1.2rem;
 }
 
@@ -305,5 +310,13 @@ footer img {
 
   .item img {
     width: 128px;
+  }
+}
+@media screen and (max-width: 310px) {
+  body {
+    padding-bottom: 280px;
+  }
+  footer {
+    height: initial;
   }
 }
