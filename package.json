@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Projet 5 d'OC",
   "scripts": {
-    "sass" : "sass  --no-source-map --watch ./src/sass/main.scss:../shopping-cart.htmlcss/style.css"   
+    "sass": "sass  --no-source-map --watch ./src/sass/main.scss:./public/css/style.css"
   },
   "author": "KWAAY",
   "license": "ISC"

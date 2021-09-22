@@ -85,10 +85,10 @@ header img {
 }
 
 #products img {
-  width: 128px;
-  height: auto;
-  border: 1.5px solid;
-  border-radius: 30px;
+  width: 100%;
+  height: 128px;
+  object-fit: cover;
+  max-width: 150px;
 }
 
 .border-gradient {
@@ -99,13 +99,14 @@ header img {
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
 }
-  .module {
+.module {
   background: white;
   color: white;
-  padding: 0.5vh;
   cursor: pointer;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  overflow: hidden;
+  max-height: 128px;
 }
 .specs {
   padding: 1vh 0.5vh ;
