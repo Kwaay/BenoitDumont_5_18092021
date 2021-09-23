@@ -199,7 +199,9 @@ header img {
   text-align: center;
   max-width: 580px;
 }
-
+.range input {
+  width: 30px;
+}
 .infos {
   text-align: center;
 }
@@ -213,7 +215,6 @@ header img {
 }
 
 .infos input {
-  width: 30px;
   margin-bottom: 2vh;
 }
 
@@ -222,7 +223,7 @@ header img {
   cursor: pointer;
 }
 
-.prix p {
+.prix span {
   font-weight: 700;
   font-size: large;
 }

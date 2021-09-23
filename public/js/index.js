@@ -4,19 +4,25 @@ fetch("http://localhost:3000/api/teddies")
       return res.json();
     }
   })
-  .then(function(value) {
-    for (let i = 0; i < value.length; i++) {
-      console.log(value[i]);
-    let teddy = document.createElement("a");
-    teddy.href = "product.html?id="+ value[i]._id
-    teddy.classList.add('border-gradient');
-    teddy.innerHTML = '<div class="module"><img src="' + value[i].imageUrl + '" alt="' + value[i].name + '"></div><div class="specs"><p>' + value[i].name + '</p><span>Prix : ' + value[i].price + ' €</span></div>';
-    let teddycontainer = document.getElementById("products");
-    teddycontainer.appendChild(teddy);
+  .then(function(teddies) {
+    for (const teddy of teddies) {
+      let teddyCard = document.createElement("a");
+      teddyCard.href = "product.html?id="+ teddy._id
+      teddyCard.classList.add('border-gradient');
+      teddyCard.innerHTML = /*HTML*/ `
+        <div class="module">
+          <img src="${teddy.imageUrl}" alt="${teddy.name}">
+        </div>
+        <div class="specs">
+          <p>${teddy.name}</p>
+          <span>Prix : ${teddy.price} €</span>
+        </div>
+      `;
+      let teddyContainer = document.getElementById("products");
+      teddyContainer.appendChild(teddyCard);
     }
   })
   .catch(function(err) {
-    // Une erreur est survenue
+    // Une erreur est survenue                                                                                                   
   });
     
-
