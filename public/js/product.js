@@ -5,7 +5,7 @@ let url =  new URL(url_link);
 let search_params = url.searchParams;
 let id = search_params.get('id');
 
-
+// récupération des données API + génération de l'HTML
 fetch("http://localhost:3000/api/teddies/" + id)
     .then(function(res) {
         if (res.ok) {
@@ -48,6 +48,7 @@ fetch("http://localhost:3000/api/teddies/" + id)
         let productContainer = document.querySelector("main");
         productContainer.appendChild(product);
 
+        // Système pour diminuer ou incrémenter le nombre de l'input "Quantité"
         let down = document.querySelector(".range #less")
         let up = document.querySelector(".range #plus")
         let quantityInput = document.getElementById("nb")
@@ -69,16 +70,16 @@ fetch("http://localhost:3000/api/teddies/" + id)
             let newPrice = document.querySelector('div.total span');
             newPrice.innerText = total;
         });
-        
+
+        // Système de génération des options par rapport au nombre de couleurs définies pour le teddy dans l'API
         let optionsContainer = document.getElementById('color-select');
         teddy.colors.forEach((option) => {
             let optionElement = document.createElement('option');
             optionElement.innerText = option;
-            optionsContainer.appendChild(optionElement);
-
-            
-                    
+            optionsContainer.appendChild(optionElement);           
         });
+
+        //Système de récupération de l'option choisie + return si la couleur est pas choisie
         let cart = document.getElementById('add-to-cart');
         cart.addEventListener('click', () => {
             let colorSelected = optionsContainer.value;
@@ -93,6 +94,7 @@ fetch("http://localhost:3000/api/teddies/" + id)
                 color: colorSelected,
                 quantity: quantitySelected
             };
+            // Système pour ajouter l'object product avec les données du teddy dans le localStorage
             let localPanier = JSON.parse(localStorage.getItem('panier'))
             console.log(localPanier);
             if (!localPanier) {
@@ -103,6 +105,7 @@ fetch("http://localhost:3000/api/teddies/" + id)
                 localPanier.push(product);
             }
             localStorage.setItem('panier',JSON.stringify(localPanier));
+            // Redirection vers la page du panier avec un délai de 1s / 1000ms
             window.setTimeout(() => {
                 document.location.href="./shopping-cart.html";
             },1000);
@@ -112,7 +115,6 @@ fetch("http://localhost:3000/api/teddies/" + id)
     });        
 
 
-// button -> regarder si le panier est créé, si pas de poanier créer une varibale panier tableau vide > ajouter ton produit > lorsque que leproduit est stocké > enregistrer dans le local storage
 // get teddy for api //
 // create element based on data //
 // add in cart //
