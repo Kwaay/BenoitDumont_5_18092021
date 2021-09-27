@@ -80,29 +80,38 @@ fetch("http://localhost:3000/api/teddies/" + id)
         });
 
         //Système de récupération de l'option choisie + return si la couleur est pas choisie
-        let cart = document.getElementById('add-to-cart');
-        cart.addEventListener('click', () => {
+        let cartbtn = document.getElementById('add-to-cart');
+        cartbtn.addEventListener('click', () => {
             let colorSelected = optionsContainer.value;
             if(colorSelected === "--Choisissez une couleur--") {
-                alert("Vous n'avez pas choisi une couleur, veuillez le faire avant de continuer")
+                alert("Vous n'avez pas choisi une couleur, veuillez le faire avant de continuer");
                 return;
             }
             let quantitySelected = parseInt(quantityInput.value);
             let product = {
                 id: id,
-                price: teddy.price / 100,
                 color: colorSelected,
                 quantity: quantitySelected
             };
             // Système pour ajouter l'object product avec les données du teddy dans le localStorage
             let localPanier = JSON.parse(localStorage.getItem('panier'))
-            console.log(localPanier);
             if (!localPanier) {
                 localPanier = [product];
-                console.log(JSON.stringify(localPanier));
             }
             else {
-                localPanier.push(product);
+                let index = null;
+                localPanier.forEach((productInCart,indexInCart) => {
+                    if (productInCart.id === product.id && productInCart.color === product.color) {
+                        index = indexInCart;
+                    }
+                })
+                if (index == null) {
+                    localPanier.push(product);
+                }
+                else {
+                    localPanier[index].quantity += product.quantity;
+                }
+               
             }
             localStorage.setItem('panier',JSON.stringify(localPanier));
             // Redirection vers la page du panier avec un délai de 1s / 1000ms

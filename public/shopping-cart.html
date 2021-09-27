@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/cbf8feb3a6.js" crossorigin="anonymous"></script>
+        <script src="./js/shopping-cart.js" defer></script>
     </head>
     <body>
         <header>
@@ -19,68 +20,7 @@
             </div>
         </header>
         <main>
-            <section id="panier">
-                <h1>Panier</h1>
-                <p class="total">Vous avez X articles dans votre panier</p>
-                <div class="article">
-                    <div class="card">
-                       <img src="./images/produits/1_blanc.jpg" alt="Ourson 1">
-                       <div class="content">
-                            <h3>Ourson en peluche</h3>
-                            <p>Couleur : X</p>
-                           <form>
-                               <label name="quantity">Quantité</label>
-                               <div class="range">
-                                <i class="fas fa-minus"></i><input type="number" id="nb" value="1" min="0" max="99"><i class="fas fa-plus"></i>
-                               </div>
-                            </form>
-                            <div class="prix">
-                                <p>Prix: X €</p>
-                            </div>
-                       </div> 
-                    </div>
-                    <div class="card">
-                        <img src="./images/produits/1_bleu.jpg" alt="Ourson 2">
-                        <div class="content">
-                            <h3>Ourson en peluche</h3>
-                            <p>Couleur : X</p>
-                            <form>
-                                <label name="quantity">Quantité</label>
-                                <div class="range">
-                                 <i class="fas fa-minus"></i><input type="number" id="nb" value="1" min="0" max="99"><i class="fas fa-plus"></i>
-                                </div>
-                            </form>
-                            <div class="prix">
-                                <p>Prix: X €</p>
-                            </div>
-                        </div> 
-                     </div>
-                     <div class="card">
-                        <img src="./images/produits/1_marron.jpg" alt="Ourson 3">
-                        <div class="content">
-                            <h3>Ourson en peluche</h3>
-                            <p>Couleur : X</p>
-                            <form>
-                                <label name="quantity">Quantité</label>
-                                <div class="range">
-                                 <i class="fas fa-minus"></i><input type="number" id="nb" value="1" min="0" max="99"><i class="fas fa-plus"></i>
-                                </div>
-                            </form>
-                            <div class="prix">
-                                <p>Prix: X €</p>
-                            </div>
-                        </div> 
-                    </div>
-                </div> 
-                <div class="total">
-                    <p>Votre total à payer sera de : <span>X</span> €</p>
-                </div>
-                <div class="buy">
-                    <a href="./order-confirm.html">
-                        <input type="button" value="Acheter" class="btn-buy">
-                    </a>
-                    </div>
-            </section>
+           
         </main>
         <footer>
             <div class="social">
@@ -97,5 +37,6 @@
                 <a href="#">Conditions d'utilisation</a>
             </div>
         </footer>
+        
     </body>
 </html>
