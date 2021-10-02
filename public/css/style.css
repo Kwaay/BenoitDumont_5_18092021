@@ -176,7 +176,7 @@ header img {
   padding-top: 1vh;
 }
 
-.btn-buy {
+.btn-validate {
   padding: 2vh;
   width: 150px;
   border-radius: 30px;
@@ -190,6 +190,55 @@ header img {
   cursor: pointer;
 }
 
+.cart-form {
+  opacity: 0;
+  display: none;
+}
+.cart-form.show {
+  animation: 1s linear show forwards !important;
+  margin-top: -60px;
+  display: block;
+}
+
+.cart-form input {
+  border-image-source: linear-gradient(318deg, #9860e0, #c7795e);
+  border-width: 1pt;
+  border-image-slice: 1;
+  margin: 1vh;
+  height: 25px;
+  width: 15%;
+}
+.cart-form input:focus {
+  outline: transparent;
+  border-width: 1.5pt;
+}
+
+.hide {
+  animation: 0.25s linear hide forwards;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes hide {
+  0% {
+    display: block;
+    opacity: 1;
+  }
+  99% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}
 /*--------------------- Products ----------------------*/
 #details {
   text-align: center;
