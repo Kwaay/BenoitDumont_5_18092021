@@ -1,11 +1,11 @@
 let panier = JSON.parse(localStorage.getItem("panier"));
-if (panier) {
+if (panier.length >= 1) {
 	let cart = document.createElement("section");
 	cart.id = "panier";
 	cart.innerHTML = /*HTML*/ `
         <div class="title">
             <h1>Panier</h1>
-            <p class="total">Vous avez ${panier.length} articles dans votre panier</p>
+            <p class="total">Vous avez ${panier.length} article(s) dans votre panier</p>
         </div>
         <div class="article">
         </div>
@@ -29,7 +29,7 @@ if (panier) {
 				<br />
 				<input type="text" placeholder="Ville" id="city" required>
 				<br />
-				<input type="submit">
+				<input type="submit" id="send">
    			</form>  
         </div>`;
 
@@ -125,3 +125,44 @@ if (panier) {
 		showForm.classList.add("hide");
 	});
 }
+else {
+	let empty = document.createElement("div");
+	let emptyContainer =  document.querySelector("main");
+	emptyContainer.classList.add("max");
+	empty.classList.add('empty')
+	empty.innerHTML = /*HTML*/ `<p>Le panier est vide</p>`
+	emptyContainer.appendChild(empty);
+
+}
+
+let submitButton = document.querySelector('div.cart-form #send');
+
+submitButton.addEventListener("click", (event) => {
+	event.preventDefault();
+	event.stopPropagation();
+	let allFormInformations = {
+		firstName: document.querySelector('div.cart-form #firstName').value,
+		lastName: document.getElementById('lastName').value,
+		email: document.getElementById('email').value,
+		address: document.getElementById('address').value,
+		city: document.getElementById('city').value
+	}
+	let products = [];
+	panier.forEach((product) => {
+		for (let quantityIndex = 0; quantityIndex < product.quantity; quantityIndex++) {
+			products.push(product.id);
+		}			
+	})
+	let body = {
+		contact: allFormInformations,
+		products: products
+	}
+	fetch("http://localhost:3000/api/teddies/order", {
+		headers: {
+			'Accept': 'application/json', 
+			'Content-Type': 'application/json'
+		},
+		method: "POST",
+    	body: JSON.stringify(body)
+	}); 
+});

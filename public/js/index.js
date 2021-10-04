@@ -15,7 +15,7 @@ fetch("http://localhost:3000/api/teddies")
         </div>
         <div class="specs">
           <p>${teddy.name}</p>
-          <span>Prix : ${teddy.price} €</span>
+          <span>Prix : ${teddy.price / 100} €</span>
         </div>
       `;
       let teddyContainer = document.getElementById("products");

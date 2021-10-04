@@ -13,7 +13,6 @@ fetch("http://localhost:3000/api/teddies/" + id)
         }
     })
     .then(function(teddy) {
-        console.log(teddy);
         let prixTotal = parseInt(teddy.price / 100);
         let product = document.createElement("section");
         product.id = 'details';

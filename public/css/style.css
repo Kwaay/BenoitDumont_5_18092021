@@ -1,5 +1,5 @@
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Oxygen", sans-serif;
   padding: 0;
   margin: 0;
   position: relative;
@@ -118,6 +118,21 @@ header img {
 }
 
 /*--------------------- Shopping Cart ----------------------*/
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Oxygen";
+  font-size: 5rem;
+  height: 80%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.max {
+  height: 60vh;
+}
+
 #panier {
   text-align: center;
 }
@@ -183,7 +198,7 @@ header img {
   border: 1px solid transparent;
   background: linear-gradient(318deg, #9860e0, #c7795e);
   color: white;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: large;
   font-weight: 500;
   box-shadow: 0.25rem 0.25rem 0.5rem #aeaeae;
@@ -292,7 +307,7 @@ header img {
   border: 1px solid transparent;
   background: linear-gradient(318deg, #9860e0, #c7795e);
   color: white;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: large;
   font-weight: 500;
   box-shadow: 0.25rem 0.25rem 0.5rem #aeaeae;
