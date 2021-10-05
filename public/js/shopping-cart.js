@@ -16,7 +16,7 @@ if (panier.length >= 1) {
 			<input type="button" value="Valider" class="btn-validate" >
 		</div>
 		<div class="cart-form">
-			<h3>Forumulaire de livraison</h3>
+			<h3>Formulaire de livraison</h3>
 			<br />
 			<form>
 				<input type="text" placeholder="Nom" id="firstName" pattern="/^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/" required >

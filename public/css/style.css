@@ -335,14 +335,16 @@ header img {
   margin-bottom: 2vh;
   margin: 1.5vh;
   max-width: 600px;
+  flex-direction: column;
 }
 
 .item img {
-  width: 64px;
-  height: auto;
+  width: 128px;
+  height: 128px;
   margin: 1vh;
   padding-right: 0.5vh;
-  border-right: 1px solid black;
+  border-radius: 20px;
+  object-fit: cover;
 }
 
 .item p {
@@ -379,6 +381,10 @@ footer img {
   .item, .card {
     margin: 0 auto;
     margin-bottom: 2vh;
+  }
+
+  .item {
+    flex-direction: initial;
   }
 
   .item img {
