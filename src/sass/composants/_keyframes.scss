@@ -1,0 +1,22 @@
+@keyframes show {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes hide {
+    0% {
+      display: block;
+      opacity: 1;
+    }
+    99% {
+      display: block;
+      opacity: 0;
+    }
+    100% {
+      display: none;
+      opacity: 0;
+    }
+  }

@@ -1,0 +1,37 @@
+#confirm {
+    text-align: center;
+  }
+  
+  .recap {
+    padding-bottom: 2vh;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 30px;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 2vh;
+    margin: 1.5vh;
+    max-width: 600px;
+    flex-direction: column;
+  }
+  
+  .item img {
+    width: 128px;
+    height: 128px;
+    margin: 1vh;
+    padding-right: 0.5vh;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+  
+  .item p {
+    margin: 2.5vh;
+    width: 100%;
+  }
+  

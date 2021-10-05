@@ -1,0 +1,114 @@
+.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $police-oxygen;
+    font-size: 5rem;
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .max {
+    height: 60vh;
+  }
+  
+  #panier {
+    text-align: center;
+  }
+  
+  #panier h1 {
+    text-decoration: underline;
+  }
+  
+  .total {
+    padding-top: 1vh;
+    font-size: 1.2rem;
+  }
+  
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    border-radius: 30px;
+    overflow: hidden;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 2vh;
+    margin: 1.5vh;
+  }
+  
+  .card img {
+    width: 128px;
+    height: 128px;
+    object-fit: cover;
+    padding: 2vh 0px 2vh 2vh;
+  }
+  
+  .content {
+    width: 100%;
+  }
+  
+  .content input {
+    width: 30px;
+  }
+  
+  .color {
+    font-size: medium;
+  }
+  
+  .content i {
+    padding: 1vh;
+    cursor: pointer;
+  }
+  
+  .total span {
+    font-weight: bold;
+  }
+  
+  .buy {
+    padding-top: 1vh;
+  }
+  
+  .btn-validate {
+    padding: 2vh;
+    width: 150px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    background: $background-gradient;
+    color: white;
+    font-family: $police-oxygen;
+    font-size: large;
+    font-weight: 500;
+    box-shadow: 0.25rem 0.25rem 0.5rem #aeaeae;
+    cursor: pointer;
+  }
+  
+  .cart-form {
+    opacity: 0;
+    display: none;
+  }
+  .cart-form.show {
+    animation: 1s linear show forwards !important;
+    margin-top: -60px;
+    display: block;
+  }
+  
+  .cart-form input {
+    border-image-source: $background-gradient;
+    border-width: 1pt;
+    border-image-slice: 1;
+    margin: 1vh;
+    height: 25px;
+    width: 15%;
+  }
+  .cart-form input:focus {
+    outline: transparent;
+    border-width: 1.5pt;
+  }
+  
+  .hide {
+    animation: 0.25s linear hide forwards;
+  }
+  

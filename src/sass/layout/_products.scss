@@ -1,0 +1,59 @@
+#details {
+    text-align: center;
+  }
+  
+  #details img {
+    width: 80%;
+    height: auto;
+    text-align: center;
+    max-width: 580px;
+  }
+  
+  .range input {
+    width: 40px;
+  }
+  
+  .infos {
+    text-align: center;
+  }
+  
+  .infos form {
+    padding-top: 2vh;
+  }
+  
+  .infos form select {
+    margin-bottom: 2vh;
+  }
+  
+  .infos input {
+    margin-bottom: 2vh;
+  }
+  
+  .infos i {
+    padding: 1vh;
+    cursor: pointer;
+  }
+  
+  .prix span {
+    font-weight: 700;
+    font-size: large;
+  }
+  
+  .add {
+    padding-top: 1vh;
+  }
+  
+  .btn-add {
+    padding: 2vh;
+    width: 250px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    background: $background-gradient;
+    color: white;
+    font-family: $police-oxygen;
+    font-size: large;
+    font-weight: 500;
+    box-shadow: 0.25rem 0.25rem 0.5rem #aeaeae;
+    cursor: pointer;
+  }
+  

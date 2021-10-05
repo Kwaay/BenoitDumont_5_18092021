@@ -1,0 +1,45 @@
+#presentation {
+    padding: 1.5vh;
+    text-align: center;
+  }
+  
+  #products {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  #products img {
+    width: 100%;
+    height: 128px;
+    object-fit: cover;
+    max-width: 150px;
+  }
+  
+  .border-gradient {
+    position: relative;
+    background: $background-gradient;
+    padding: 3px;
+    margin: 1vh;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  }
+  
+  .module {
+    background: white;
+    color: white;
+    cursor: pointer;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+    max-height: 128px;
+  }
+  
+  .specs {
+    padding: 1vh 0.5vh;
+    color: whitesmoke;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em #A8A8A8, 0 0 0.2em #A8A8A8;
+  }
+  

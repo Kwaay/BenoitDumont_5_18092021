@@ -1,0 +1,25 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5vh;
+  }
+  
+  header img {
+    width: 130px;
+    height: auto;
+  }
+  
+  .buttons i {
+    background: $background-gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: xx-large;
+  }
+  
+  .buttons a {
+    margin: 1vh;
+    cursor: pointer;
+  }
+  

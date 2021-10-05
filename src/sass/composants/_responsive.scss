@@ -1,0 +1,23 @@
+@media screen and (min-width: 429px) {
+    .item, .card {
+      margin: 0 auto;
+      margin-bottom: 2vh;
+    }
+  
+    .item {
+      flex-direction: initial;
+    }
+  
+    .item img {
+      width: 128px;
+    }
+  }
+  @media screen and (max-width: 310px) {
+    body {
+      padding-bottom: 280px;
+    }
+  
+    footer {
+      height: initial;
+    }
+  }

@@ -1,0 +1,22 @@
+footer {
+    text-align: center;
+    padding: 4vh;
+    background: $background-gradient;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+  }
+  
+  footer img {
+    width: 128px;
+    height: auto;
+    color: white;
+  }
+  
+  .social i {
+    color: white;
+    font-size: xx-large;
+    margin: 1vh;
+  }
