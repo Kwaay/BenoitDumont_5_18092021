@@ -19,15 +19,15 @@ if (panier.length >= 1) {
 			<h3>Forumulaire de livraison</h3>
 			<br />
 			<form>
-				<input type="text" placeholder="Nom" id="firstName" required>
+				<input type="text" placeholder="Nom" id="firstName" pattern="/^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/" required >
 				<br />
-				<input type="text" placeholder="Prénom" id="lastName" required>
+				<input type="text" placeholder="Prénom" id="lastName" pattern="/^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/" required>
 				<br />
-				<input type="email" placeholder="Email" id="email" required>
+				<input type="email" placeholder="Email" id="email" pattern="/^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]{2,}.[a-z]{2,4}$/" required>
 				<br />
-				<input type="text" placeholder="Adresse" id="address" required>
+				<input type="text" placeholder="Adresse" id="address" pattern="/^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/" required>
 				<br />
-				<input type="text" placeholder="Ville" id="city" required>
+				<input type="text" placeholder="Ville" id="city" pattern="/^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/" required>
 				<br />
 				<input type="submit" id="send">
    			</form>  
@@ -137,6 +137,12 @@ else {
 
 let submitButton = document.querySelector('div.cart-form #send');
 
+let regexfirstName = /^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
+let regexlastName = /^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/
+let regexEmail = /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]{2,}.[a-z]{2,4}$/;
+let regexAddress = /^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/;
+let regexCity = /^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/;
+
 submitButton.addEventListener("click", (event) => {
 	event.preventDefault();
 	event.stopPropagation();
@@ -147,22 +153,38 @@ submitButton.addEventListener("click", (event) => {
 		address: document.getElementById('address').value,
 		city: document.getElementById('city').value
 	}
-	let products = [];
-	panier.forEach((product) => {
-		for (let quantityIndex = 0; quantityIndex < product.quantity; quantityIndex++) {
-			products.push(product.id);
-		}			
-	})
-	let body = {
-		contact: allFormInformations,
-		products: products
+	if (
+	(!regexfirstName.test(allFormInformations.firstName)) && 
+	(!regexlastName.test(allFormInformations.lastName)) && 
+	(!regexEmail.test(allFormInformations.email)) && 
+	(!regexAddress.test(allFormInformations.address)) && 
+	(!regexCity.test(allFormInformations.city)) )
+
+	{
+		return console.log(ok);	
+	}  
+	else {
+
+		let products = [];
+		panier.forEach((product) => {
+			for (let quantityIndex = 0; quantityIndex < product.quantity; quantityIndex++) {
+				products.push(product.id);
+			}			
+		})
+		let body = {
+			contact: allFormInformations,
+			products: products
+		}
+		fetch("http://localhost:3000/api/teddies/order", {
+			headers: {
+				'Accept': 'application/json', 
+				'Content-Type': 'application/json'
+			},
+			method: "POST",
+			body: JSON.stringify(body)
+		}); 
+	
 	}
-	fetch("http://localhost:3000/api/teddies/order", {
-		headers: {
-			'Accept': 'application/json', 
-			'Content-Type': 'application/json'
-		},
-		method: "POST",
-    	body: JSON.stringify(body)
-	}); 
+
+	
 });
