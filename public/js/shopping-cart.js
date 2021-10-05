@@ -182,8 +182,22 @@ submitButton.addEventListener("click", (event) => {
 			},
 			method: "POST",
 			body: JSON.stringify(body)
-		}); 
-	
+			
+		})
+		.then(function (res) {
+			if (res.ok) {
+				return res.json();
+			}
+		})
+		.then(function (value) {
+			let orderId = value.orderId;
+			localStorage.setItem("orderId", JSON.stringify(orderId));
+			console.log(localStorage.getItem("orderId"));
+			window.setTimeout(() => {
+				document.location.href="./order-confirm.html";
+			},1000);
+		}) 
+		
 	}
 
 	
