@@ -1,18 +1,26 @@
 let panier = JSON.parse(localStorage.getItem("panier"));
-if (panier.length >= 1) {
+if (panier == null || panier == "undefined" || panier.length == 0) {
+	let empty = document.createElement("div");
+	let emptyContainer =  document.querySelector("main");
+	emptyContainer.classList.add("max");
+	empty.classList.add('empty')
+	empty.innerHTML = /*HTML*/ `<p>Le panier est vide</p>`
+	emptyContainer.appendChild(empty);
+}
+else {
 	let cart = document.createElement("section");
 	cart.id = "panier";
 	cart.innerHTML = /*HTML*/ `
-        <div class="title">
-            <h1>Panier</h1>
-            <p class="total">Vous avez ${panier.length} article(s) dans votre panier</p>
-        </div>
-        <div class="article">
-        </div>
-        <div class="total">
+		<div class="title">
+			<h1>Panier</h1>
+			<p class="total">Vous avez ${panier.length} article(s) dans votre panier</p>
+		</div>
+		<div class="article">
+		</div>
+		<div class="total">
 			<p>Votre total à payer sera de : <span>0</span> €</p>
-        </div>
-        <div class="buy">
+		</div>
+		<div class="buy">
 			<input type="button" value="Valider" class="btn-validate" >
 		</div>
 		<div class="cart-form">
@@ -30,110 +38,101 @@ if (panier.length >= 1) {
 				<input type="text" placeholder="Ville" id="city" pattern="/^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/" required>
 				<br />
 				<input type="submit" id="send">
-   			</form>  
-        </div>`;
-
-	let cartContainer = document.querySelector("main");
-	cartContainer.appendChild(cart);
-
-	panier.forEach((product, index) => {
-		fetch("http://localhost:3000/api/teddies/" + product.id)
-			.then(function (res) {
-				if (res.ok) {
-					return res.json();
-				}
-			})
-			.then(function (value) {
-				let object = document.createElement("div");
-				object.id = "product-" + product.id + "-" + product.color.split(" ").join("_");
-				object.classList.add("card");
-				object.innerHTML = /*HTML*/ `
-                    <img src="${value.imageUrl}" alt="${value.name}">
-                    <div class="content">
-                        <h3>${value.name}</h3>
-                        <p>${product.color}</p>
-                        <form>
-                            <label>Quantité<label>
-                            <div class="range">
-                                <i class="fas fa-minus" id="less"></i>
-                                <input type="text" id="nb" value="${product.quantity}" min="1" max="99" pattern="^[0-9]*$">
-                                <i class="fas fa-plus" id="plus"></i>
-                            </div>
-                        </form>
-                        <div class="prix">
-                            <p>Prix : ${value.price / 100} € /u</p>
-                            <p>Prix total : <span>${(value.price / 100) * product.quantity	}</span> €</p>					
-                        </div>
-                    </div> 
-                    `;
-				let objectContainer = document.querySelector(".article");
-				objectContainer.appendChild(object);
-				totalPrice();
-
-				let productIdentifier = `#product-${product.id}-${product.color.split(" ").join("_")}`;
-
-				let down = document.querySelector(`${productIdentifier} .range #less`);
-				let up = document.querySelector(`${productIdentifier} .range #plus`);
-				let quantityInput = document.querySelector(`${productIdentifier} #nb`);
-				down.addEventListener("click", () => {
-					
-					if (quantityInput.value <= Number(quantityInput.min)) {
-						panier.splice(index, 1);
+				</form>  
+		</div>`;
+	
+		let cartContainer = document.querySelector("main");
+		cartContainer.appendChild(cart);
+	
+		panier.forEach((product, index) => {
+			fetch("http://localhost:3000/api/teddies/" + product.id)
+				.then(function (res) {
+					if (res.ok) {
+						return res.json();
+					}
+				})
+				.then(function (value) {
+					let object = document.createElement("div");
+					object.id = "product-" + product.id + "-" + product.color.split(" ").join("_");
+					object.classList.add("card");
+					object.innerHTML = /*HTML*/ `
+						<img src="${value.imageUrl}" alt="${value.name}">
+						<div class="content">
+							<h3>${value.name}</h3>
+							<p>${product.color}</p>
+							<form>
+								<label>Quantité<label>
+								<div class="range">
+									<i class="fas fa-minus" id="less"></i>
+									<input type="text" id="nb" value="${product.quantity}" min="1" max="99" pattern="^[0-9]*$">
+									<i class="fas fa-plus" id="plus"></i>
+								</div>
+							</form>
+							<div class="prix">
+								<p>Prix : ${value.price / 100} € /u</p>
+								<p>Prix total : <span>${(value.price / 100) * product.quantity	}</span> €</p>					
+							</div>
+						</div> 
+						`;
+					let objectContainer = document.querySelector(".article");
+					objectContainer.appendChild(object);
+					totalPrice();
+	
+					let productIdentifier = `#product-${product.id}-${product.color.split(" ").join("_")}`;
+	
+					let down = document.querySelector(`${productIdentifier} .range #less`);
+					let up = document.querySelector(`${productIdentifier} .range #plus`);
+					let quantityInput = document.querySelector(`${productIdentifier} #nb`);
+					down.addEventListener("click", () => {
+						
+						if (quantityInput.value <= Number(quantityInput.min)) {
+							panier.splice(index, 1);
+							localStorage.setItem("panier", JSON.stringify(panier));
+							window.location.reload();
+							return;
+						}
+						quantityInput.value--;
+						let total = (value.price / 100) * Number(quantityInput.value);
+						let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
+						newPrice.innerText = total;
+						totalPrice();
+						panier[index].quantity = Number(quantityInput.value);
 						localStorage.setItem("panier", JSON.stringify(panier));
-						window.location.reload();
-						return;
-					}
-					quantityInput.value--;
-					let total = (value.price / 100) * Number(quantityInput.value);
-					let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
-					newPrice.innerText = total;
-					totalPrice();
-					panier[index].quantity = Number(quantityInput.value);
-					localStorage.setItem("panier", JSON.stringify(panier));
-
+	
+					});
+					up.addEventListener("click", () => {
+						if (quantityInput.value >= Number(quantityInput.max)) {
+							return;
+						}
+						quantityInput.value++;
+						let total = (value.price / 100) * Number(quantityInput.value);
+						let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
+						localStorage.setItem("panier", JSON.stringify(panier));
+						newPrice.innerText = total;
+						totalPrice();
+						panier[index].quantity = Number(quantityInput.value);
+						localStorage.setItem("panier", JSON.stringify(panier));
+					});
+					
+					
 				});
-				up.addEventListener("click", () => {
-					if (quantityInput.value >= Number(quantityInput.max)) {
-						return;
-					}
-					quantityInput.value++;
-					let total = (value.price / 100) * Number(quantityInput.value);
-					let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
-					localStorage.setItem("panier", JSON.stringify(panier));
-					newPrice.innerText = total;
-					totalPrice();
-					panier[index].quantity = Number(quantityInput.value);
-					localStorage.setItem("panier", JSON.stringify(panier));
-				});
-				
-				
-			});
-	});
-	function totalPrice() {
-		const subTotalContainers = document.querySelectorAll("div.prix span");
-		let total = 0;
-		subTotalContainers.forEach((subTotal) => {
-			total = total + Number(subTotal.innerText);
 		});
-		const totalContainer = document.querySelector("div.total span");
-		totalContainer.innerText = total;
+		function totalPrice() {
+			const subTotalContainers = document.querySelectorAll("div.prix span");
+			let total = 0;
+			subTotalContainers.forEach((subTotal) => {
+				total = total + Number(subTotal.innerText);
+			});
+			const totalContainer = document.querySelector("div.total span");
+			totalContainer.innerText = total;
+		}
+		let showForm = document.querySelector('div.buy input');
+		showForm.addEventListener("click", () => {
+			let form = document.querySelector('div.cart-form');
+			form.classList.add("show");
+			showForm.classList.add("hide");
+		});
 	}
-	let showForm = document.querySelector('div.buy input');
-	showForm.addEventListener("click", () => {
-		let form = document.querySelector('div.cart-form');
-		form.classList.add("show");
-		showForm.classList.add("hide");
-	});
-}
-else {
-	let empty = document.createElement("div");
-	let emptyContainer =  document.querySelector("main");
-	emptyContainer.classList.add("max");
-	empty.classList.add('empty')
-	empty.innerHTML = /*HTML*/ `<p>Le panier est vide</p>`
-	emptyContainer.appendChild(empty);
-
-}
 
 let submitButton = document.querySelector('div.cart-form #send');
 

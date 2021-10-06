@@ -5,6 +5,14 @@ let url =  new URL(url_link);
 let search_params = url.searchParams;
 let id = search_params.get('id');
 
+if (id == null || id == "undefined") {
+    let empty = document.createElement("div");
+	let emptyContainer =  document.querySelector("main");
+	emptyContainer.classList.add("max");
+	empty.classList.add('empty')
+	empty.innerHTML = /*HTML*/ `<p>Produit non trouvé</p>`
+	emptyContainer.appendChild(empty);
+}
 // récupération des données API + génération de l'HTML
 fetch("http://localhost:3000/api/teddies/" + id)
     .then(function(res) {
