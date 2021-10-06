@@ -1,4 +1,6 @@
+// Récupération du panier //
 let panier = JSON.parse(localStorage.getItem("panier"));
+// Si le panier est null ou "undefined" ou si la longueur du panier est égal à 0 affiche "Le panir est vide" //
 if (panier == null || panier == "undefined" || panier.length == 0) {
 	let empty = document.createElement("div");
 	let emptyContainer =  document.querySelector("main");
@@ -7,6 +9,7 @@ if (panier == null || panier == "undefined" || panier.length == 0) {
 	empty.innerHTML = /*HTML*/ `<p>Le panier est vide</p>`
 	emptyContainer.appendChild(empty);
 }
+// Sinon, il crée une section avec l'id "panier" est qui contient le restant de la page //
 else {
 	let cart = document.createElement("section");
 	cart.id = "panier";
@@ -43,7 +46,8 @@ else {
 	
 		let cartContainer = document.querySelector("main");
 		cartContainer.appendChild(cart);
-	
+
+		// Pour chaque élément dans le panier, récupèrer les données de l'API en fonction de l'id du produit, puis les stocker dans la variable value //
 		panier.forEach((product, index) => {
 			fetch("http://localhost:3000/api/teddies/" + product.id)
 				.then(function (res) {
@@ -77,20 +81,22 @@ else {
 					let objectContainer = document.querySelector(".article");
 					objectContainer.appendChild(object);
 					totalPrice();
-	
+
+					// Crée un chaîne de caractères unique pour chaqu produit avec #produit et le produit.id - la product.color .split . join pour transformer les espaces en "_" //
 					let productIdentifier = `#product-${product.id}-${product.color.split(" ").join("_")}`;
 	
 					let down = document.querySelector(`${productIdentifier} .range #less`);
 					let up = document.querySelector(`${productIdentifier} .range #plus`);
 					let quantityInput = document.querySelector(`${productIdentifier} #nb`);
 					down.addEventListener("click", () => {
-						
+						// Si le nombre de l'input arrive à 0 on supprime l'élément dans le localStorage et on refresh la page //
 						if (quantityInput.value <= Number(quantityInput.min)) {
 							panier.splice(index, 1);
 							localStorage.setItem("panier", JSON.stringify(panier));
 							window.location.reload();
 							return;
 						}
+						// Si c'est supérieur à 0 , on décrémente et on recalcul le prix total, en modifiant la quantité dans le localStoarge par rapport à l'input //
 						quantityInput.value--;
 						let total = (value.price / 100) * Number(quantityInput.value);
 						let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
@@ -101,9 +107,11 @@ else {
 	
 					});
 					up.addEventListener("click", () => {
+						// Si le nombre est supérieur ou égal à 99, on arrête l'incrémentation //
 						if (quantityInput.value >= Number(quantityInput.max)) {
 							return;
 						}
+						// Si c'est inférieur ou égal à 99 , on incrémente et on recalcul le prix total, en modifiant la quantité dans le localStoarge par rapport à l'input //
 						quantityInput.value++;
 						let total = (value.price / 100) * Number(quantityInput.value);
 						let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
@@ -117,6 +125,7 @@ else {
 					
 				});
 		});
+		// On récupère tous les prix totaux et on les additionne pour afficher le prix total en fin de page //
 		function totalPrice() {
 			const subTotalContainers = document.querySelectorAll("div.prix span");
 			let total = 0;
@@ -126,6 +135,7 @@ else {
 			const totalContainer = document.querySelector("div.total span");
 			totalContainer.innerText = total;
 		}
+		// Lorsque click sur le bouton "Valider", on cache le dit bouton et on affiche le formulaire //
 		let showForm = document.querySelector('div.buy input');
 		showForm.addEventListener("click", () => {
 			let form = document.querySelector('div.cart-form');
@@ -135,13 +145,14 @@ else {
 	}
 
 let submitButton = document.querySelector('div.cart-form #send');
-
+ // Mise des regex en tant que variables pour la comparaison //
 let regexfirstName = /^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
 let regexlastName = /^(([a-zA-ZÀ-ÿ]+[\s-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/
 let regexEmail = /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]{2,}.[a-z]{2,4}$/;
 let regexAddress = /^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/;
 let regexCity = /^(([a-zA-ZÀ-ÿ0-9]+[\s-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,50}$/;
 
+// Au click sur le bouton de validation de formulaire, on récupère les données du formulaire, on les compare avec les variables de regex et si elles sont pas valides, on arrête là //
 submitButton.addEventListener("click", (event) => {
 	event.preventDefault();
 	event.stopPropagation();
@@ -160,20 +171,22 @@ submitButton.addEventListener("click", (event) => {
 	(!regexCity.test(allFormInformations.city)) )
 
 	{
-		return console.log(ok);	
+		return;	
 	}  
 	else {
-
+		// Sinon, on crée un tableau vide qui viendra réceptionner les données des products du panier //
 		let products = [];
 		panier.forEach((product) => {
 			for (let quantityIndex = 0; quantityIndex < product.quantity; quantityIndex++) {
 				products.push(product.id);
 			}			
 		})
+		// Mise en place d'une variable body qui contient les deux objects //
 		let body = {
 			contact: allFormInformations,
 			products: products
 		}
+		// Requête POST à l'API pour envoyer les objects en échange du orderId //
 		fetch("http://localhost:3000/api/teddies/order", {
 			headers: {
 				'Accept': 'application/json', 
@@ -188,6 +201,7 @@ submitButton.addEventListener("click", (event) => {
 				return res.json();
 			}
 		})
+		// Si la requête est bonne, stocker les données de retour dans la variable value, puis récupèrer le orderId et le stocker dans le localStorage //
 		.then(function (value) {
 			let orderId = value.orderId;
 			localStorage.setItem("orderId", JSON.stringify(orderId));

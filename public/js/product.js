@@ -1,9 +1,9 @@
 // get id in url //
+    let url_link = window.location.href;
+    let url =  new URL(url_link);
+    let search_params = url.searchParams;
+    let id = search_params.get('id');
 
-let url_link = window.location.href;
-let url =  new URL(url_link);
-let search_params = url.searchParams;
-let id = search_params.get('id');
 
 if (id == null || id == "undefined") {
     let empty = document.createElement("div");
@@ -56,9 +56,9 @@ fetch("http://localhost:3000/api/teddies/" + id)
         productContainer.appendChild(product);
 
         // Système pour diminuer ou incrémenter le nombre de l'input "Quantité"
+        let quantityInput = document.getElementById("nb")
         let down = document.querySelector(".range #less")
         let up = document.querySelector(".range #plus")
-        let quantityInput = document.getElementById("nb")
         down.addEventListener("click", () => {
             if (quantityInput.value <= Number(quantityInput.min)) {
                 return;
@@ -83,7 +83,7 @@ fetch("http://localhost:3000/api/teddies/" + id)
         teddy.colors.forEach((option) => {
             let optionElement = document.createElement('option');
             optionElement.innerText = option;
-            optionsContainer.appendChild(optionElement);           
+            optionsContainer.appendChild(optionElement);         
         });
 
         //Système de récupération de l'option choisie + return si la couleur est pas choisie
@@ -129,8 +129,3 @@ fetch("http://localhost:3000/api/teddies/" + id)
             
         })
     });        
-
-
-// get teddy for api //
-// create element based on data //
-// add in cart //

@@ -1,14 +1,17 @@
+//Récupération de l'orderId et du panier //
 let orderId = JSON.parse(localStorage.getItem("orderId"))
 let panier = JSON.parse(localStorage.getItem("panier"))
 
+// Si la panier ou l'orderId est soit null ou "undefined" ou leurs longueurs == 0, mettre un message d'erreur "Vous n'avez pas passé de commandes" //
 if(panier == null || panier == "undefined" || panier.length == 0 && orderId == null || orderId == "undefined" || panier.length == 0) {
     let empty = document.createElement("div");
     let emptyContainer =  document.querySelector("main");
     emptyContainer.classList.add("max");
     empty.classList.add('empty')
-    empty.innerHTML = /*HTML*/ `<p>Vous n'avez pas passé de commande</p>`
+    empty.innerHTML = /*HTML*/ `<p>Vous n'avez pas passé de commandes</p>`
     emptyContainer.appendChild(empty);
 }
+// Sinon, créer une section avec l'id "confirm" et comme contenu le restant de la page //
 else {
     let orderConfirm = document.createElement("section");
         orderConfirm.id = "confirm";
@@ -27,6 +30,7 @@ else {
         `
         let orderContainer = document.querySelector('main');
         orderContainer.appendChild(orderConfirm);
+        //Pour chaque élement dans le panier, faire un appel API + l'id du panier sur l'index actuel, et stocker les données dans la variable value //
         panier.forEach((product, index) => {
             let productIdentifier = `#product-${product.id}-${product.color.split(" ").join("_")}`;
             fetch("http://localhost:3000/api/teddies/" + panier[index].id)
@@ -58,6 +62,7 @@ else {
                             totalContainer.innerText = total;
                         }
                     totalPrice();
+                    // Suppression des données du panier et de l'orderId dans le localStorage //
                     localStorage.removeItem("panier");
                     localStorage.removeItem("orderId");
                 })
