@@ -68,7 +68,7 @@ else {
 								<label>Quantité<label>
 								<div class="range">
 									<i class="fas fa-minus" id="less"></i>
-									<input type="text" id="nb" value="${product.quantity}" min="1" max="99" pattern="^[0-9]*$">
+									<input type="number" id="nb" value="${product.quantity}" min="1" max="99" pattern="^[0-9]*$" disabled>
 									<i class="fas fa-plus" id="plus"></i>
 								</div>
 							</form>
@@ -98,13 +98,13 @@ else {
 						}
 						// Si c'est supérieur à 0 , on décrémente et on recalcul le prix total, en modifiant la quantité dans le localStoarge par rapport à l'input //
 						quantityInput.value--;
+						
 						let total = (value.price / 100) * Number(quantityInput.value);
 						let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
 						newPrice.innerText = total;
 						totalPrice();
 						panier[index].quantity = Number(quantityInput.value);
 						localStorage.setItem("panier", JSON.stringify(panier));
-	
 					});
 					up.addEventListener("click", () => {
 						// Si le nombre est supérieur ou égal à 99, on arrête l'incrémentation //
@@ -115,7 +115,6 @@ else {
 						quantityInput.value++;
 						let total = (value.price / 100) * Number(quantityInput.value);
 						let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
-						localStorage.setItem("panier", JSON.stringify(panier));
 						newPrice.innerText = total;
 						totalPrice();
 						panier[index].quantity = Number(quantityInput.value);
@@ -126,15 +125,7 @@ else {
 				});
 		});
 		// On récupère tous les prix totaux et on les additionne pour afficher le prix total en fin de page //
-		function totalPrice() {
-			const subTotalContainers = document.querySelectorAll("div.prix span");
-			let total = 0;
-			subTotalContainers.forEach((subTotal) => {
-				total = total + Number(subTotal.innerText);
-			});
-			const totalContainer = document.querySelector("div.total span");
-			totalContainer.innerText = total;
-		}
+		
 		// Lorsque click sur le bouton "Valider", on cache le dit bouton et on affiche le formulaire //
 		let showForm = document.querySelector('div.buy input');
 		showForm.addEventListener("click", () => {
@@ -205,7 +196,7 @@ submitButton.addEventListener("click", (event) => {
 		.then(function (value) {
 			let orderId = value.orderId;
 			localStorage.setItem("orderId", JSON.stringify(orderId));
-			console.log(localStorage.getItem("orderId"));
+			alert ('Votre commande a bien été passée');
 			window.setTimeout(() => {
 				document.location.href="./order-confirm.html";
 			},1000);

@@ -38,7 +38,7 @@ fetch("http://localhost:3000/api/teddies/" + id)
                     <label>Quantité</label>
                     <div class="range">
                         <i class="fas fa-minus" id="less"></i>
-                        <input type="text" id="nb" value="1" min="0" max="99" pattern="^[0-9]*$">
+                        <input type="number" id="nb" value="1" min="1" max="99" pattern="^[0-9]*$" disabled>
                         <i class="fas fa-plus" id="plus"></i>
                     </div>
                 </form>
@@ -64,8 +64,8 @@ fetch("http://localhost:3000/api/teddies/" + id)
                 return;
             }
             quantityInput.value--;
-            let total = (teddy.price / 100) * quantityInput.value;
-            let newPrice = document.querySelector('div.total span');
+            let total = (value.price / 100) * Number(quantityInput.value);
+            let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
             newPrice.innerText = total;
         });
         up.addEventListener("click", () => {
@@ -73,8 +73,8 @@ fetch("http://localhost:3000/api/teddies/" + id)
                 return;
             }
             quantityInput.value++;
-            let total = (teddy.price / 100) * quantityInput.value;
-            let newPrice = document.querySelector('div.total span');
+            let total = (value.price / 100) * Number(quantityInput.value);
+            let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
             newPrice.innerText = total;
         });
 
@@ -121,11 +121,10 @@ fetch("http://localhost:3000/api/teddies/" + id)
                
             }
             localStorage.setItem('panier',JSON.stringify(localPanier));
+            alert ('Votre produit a bien été envoyé dans votre panier');
             // Redirection vers la page du panier avec un délai de 1s / 1000ms
             window.setTimeout(() => {
                 document.location.href="./shopping-cart.html";
             },1000);
-            
-            
         })
     });        

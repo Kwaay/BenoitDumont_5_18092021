@@ -51,20 +51,11 @@ else {
                         `;
                         let objectContainer = document.querySelector("div.list");
                         objectContainer.appendChild(object);
-
-                        function totalPrice() {
-                            let subTotalContainers = document.querySelectorAll(`p.price span`);
-                            let total = 0;
-                            subTotalContainers.forEach((subTotal) => {
-                                total = (total + Number(subTotal.innerText));
-                            });
-                            const totalContainer = document.querySelector("div.total span");
-                            totalContainer.innerText = total;
-                        }
                     totalPrice();
+                   
                     // Suppression des données du panier et de l'orderId dans le localStorage //
                     localStorage.removeItem("panier");
                     localStorage.removeItem("orderId");
-                })
+                }) 
         })
     }
