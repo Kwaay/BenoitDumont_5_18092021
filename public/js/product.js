@@ -64,8 +64,8 @@ fetch("http://localhost:3000/api/teddies/" + id)
                 return;
             }
             quantityInput.value--;
-            let total = (value.price / 100) * Number(quantityInput.value);
-            let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
+            let total = (teddy.price / 100) * quantityInput.value;
+            let newPrice = document.querySelector('div.total span');
             newPrice.innerText = total;
         });
         up.addEventListener("click", () => {
@@ -73,8 +73,8 @@ fetch("http://localhost:3000/api/teddies/" + id)
                 return;
             }
             quantityInput.value++;
-            let total = (value.price / 100) * Number(quantityInput.value);
-            let newPrice = document.querySelector(`${productIdentifier} div.prix span`);
+            let total = (teddy.price / 100) * quantityInput.value;
+            let newPrice = document.querySelector('div.total span');
             newPrice.innerText = total;
         });
 
@@ -123,8 +123,6 @@ fetch("http://localhost:3000/api/teddies/" + id)
             localStorage.setItem('panier',JSON.stringify(localPanier));
             alert ('Votre produit a bien été envoyé dans votre panier');
             // Redirection vers la page du panier avec un délai de 1s / 1000ms
-            window.setTimeout(() => {
-                document.location.href="./shopping-cart.html";
-            },1000);
+            document.location.href="./shopping-cart.html";
         })
     });        

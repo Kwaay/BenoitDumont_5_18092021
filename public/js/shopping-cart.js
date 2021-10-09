@@ -197,9 +197,7 @@ submitButton.addEventListener("click", (event) => {
 			let orderId = value.orderId;
 			localStorage.setItem("orderId", JSON.stringify(orderId));
 			alert ('Votre commande a bien été passée');
-			window.setTimeout(() => {
-				document.location.href="./order-confirm.html";
-			},1000);
+			document.location.href="./order-confirm.html";
 		}) 
 		
 	}
